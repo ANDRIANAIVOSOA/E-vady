@@ -1,6 +1,45 @@
 easy_admin:
+    site_name: 'E-vady'
+    design:
+        menu: ['User', 'Test']
+        brand_color: '#1ABC9C'
+        assets:
+            css:
+                # ...
+                - 'bundles/easyadmin/bootstrap-all.css'
+            js:
+                - 'bundles/easyadmin/bootstrap-all.js'
     entities:
 #        # List the entity class name you want to manage
 #        - App\Entity\Product
 #        - App\Entity\Category
-        - App\Entity\User
+        User:
+
+            label: 'Utilisateur'
+            avatar_property_path: 'image'
+            avatar_uri_path: '%app.path.profile%/'
+            class: App\Entity\User
+            list:
+                fields: [{ property: 'profileName', label: 'Profile', type: 'image', base_path: '%app.path.profile%' },{ property: 'lastName', label: 'Nom' },{ property: 'firstName', label: 'Prenom' },{ property: 'email', label: 'Contact' },'roles']
+            show:
+                fields: [{ property: 'profileName', label: 'Profile', type: 'image', base_path: '%app.path.profile%' },{ property: 'lastName', label: 'Nom' },{ property: 'firstName', label: 'Prenom' },{ property: 'email', label: 'Contact' },'roles']
+            form:
+                fields:
+                    - { property: 'username' }
+                    - { property: 'email', type: 'email' }
+                    - { property: 'plainPassword', type: 'password', label: 'Password', help: 'Passwords must have at least 8 characters' }
+                    - { property: 'enabled', type: 'checkbox' }
+                    - { property: 'profileFile', type: 'file' }
+        Test:
+            class: App\Entity\Test
+            list:
+                fields:
+                    - { property: 'image', type: 'image', base_path: '%app.path.profile%' }
+            # ...
+            show:
+                fields:
+                    - { property: 'image', type: 'image', base_path: '%app.path.profile%' }
+
+            form:
+                fields:
+                    - { property: 'imageFile', type: 'file' }
